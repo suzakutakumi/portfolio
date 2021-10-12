@@ -1,9 +1,10 @@
 [Unit]
-Description = portfolio site
+Description = Suzakutakumi's portfolio site
 
 [Service]
-WorkingDirectory=/home/pi/Downloads/portfolio
+WorkingDirectory=/opt/portfolio
 ExecStart=sudo ./main
+Restart=always
 Type=simple
 
 [Install]
