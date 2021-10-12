@@ -1,0 +1,10 @@
+[Unit]
+Description = portfolio site
+
+[Service]
+WorkingDirectory=/home/pi/Downloads/portfolio
+ExecStart=sudo ./main
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

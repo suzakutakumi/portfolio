@@ -1,0 +1,14 @@
+<html>
+<body>
+Testだよ!<br>
+あなたは<span id="cnt"></span>人目のの来場者だよ。すぐ忘れちゃうけどね。
+<script>
+fetch("/count").then((res)=>{
+    return res.text()
+}).then((cnt)=>{
+    console.log(cnt)
+    document.getElementById("cnt").innerHTML=cnt
+})
+</script>
+</body>
+</html>
