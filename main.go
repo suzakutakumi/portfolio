@@ -15,7 +15,7 @@ func main() {
 	router.LoadHTMLGlob("docs/*.html")
 	router.GET("/", index)
 	router.GET("/count", Count)
-	router.Run()
+	router.Run("0.0.0.0:80")
 }
 func index(ctx *gin.Context) {
 	cnt++
