@@ -1,36 +1,26 @@
 package main
 
-import(
-    "net/http"
-    "html/template"
-    "log"
-    "fmt"
+import (
+	"net/http"
+	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 var cnt int
 
-func main(){
-    cnt=0
-    http.Handle("/docs/", http.StripPrefix("/docs/", http.FileServer(http.Dir("docs/"))))
-    http.HandleFunc("/",index)
-    http.HandleFunc("/count",Count)
-    log.Fatal(http.ListenAndServe(":80",nil))
+func main() {
+	cnt = 0
+	router := gin.Default()
+	router.LoadHTMLGlob("docs/*.html")
+	router.GET("/", index)
+	router.GET("/count", Count)
+	router.Run()
 }
-func index(w http.ResponseWriter, r *http.Request){
-    t, err := template.ParseFiles("./docs/index.html")
-    if err != nil {
-        panic(err.Error())
-    }
-    cnt++
-    if err := t.Execute(w, nil); err != nil {
-        panic(err.Error())
-    }
+func index(ctx *gin.Context) {
+	cnt++
+	ctx.HTML(http.StatusOK, "index.html", gin.H{})
 }
-func Count(w http.ResponseWriter, r *http.Request){
-    if r.Method!=http.MethodGet{
-        w.WriteHeader(http.StatusMethodNotAllowed)
-        w.Write([]byte("Getのみです"))
-        return
-    }
-    fmt.Fprint(w,cnt)
+func Count(ctx *gin.Context) {
+	ctx.String(http.StatusOK, strconv.Itoa(cnt))
 }
