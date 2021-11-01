@@ -13,6 +13,7 @@ func main() {
 	cnt = 0
 	router := gin.Default()
 	router.LoadHTMLGlob("docs/*.html")
+	router.Static("/img", "docs/img")
 	router.GET("/", index)
 	router.GET("/count", Count)
 	router.Run("0.0.0.0:80")
