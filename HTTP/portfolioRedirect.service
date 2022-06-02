@@ -1,0 +1,11 @@
+[Unit]
+Description = Suzakutakumi's portfolio redirect
+
+[Service]
+WorkingDirectory=/opt/portfolio/HTTP
+ExecStart=sudo ./main
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

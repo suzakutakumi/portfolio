@@ -7,12 +7,23 @@ if [ -e /opt/portfolio ]; then
     sudo rm -r /opt/portfolio/
 fi
 
+if [ -e /etc/systemd/system/portfolioRedirect.service ]; then
+    sudo rm -r /etc/systemd/system/portfolioRedirect.service
+fi
+
 go build main.go
+cd ./HTTP&&go build main.go
+cd ..
 
 sudo cp -r . /opt/portfolio/
 sudo cp ./portfolio.service /etc/systemd/system/
+sudo cp ./HTTP/portfolioRedirect.service /etc/systemd/system/
 
 sudo chmod 755 /opt/portfolio/main
+sudo chmod 755 /opt/portfolio/HTTP/main
+
 rm ./main
+rm ./HTTP/main
 
 sudo systemctl enable portfolio.service
+sudo systemctl enable portfolioRedirect.service
