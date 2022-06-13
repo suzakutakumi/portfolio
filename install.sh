@@ -15,7 +15,7 @@ go build main.go
 cd ./HTTP&&go build main.go
 cd ..
 
-sudo cp -r . /opt/portfolio/
+sudo cp -r . /opt/portfolio
 sudo cp ./portfolio.service /etc/systemd/system/
 sudo cp ./HTTP/portfolioRedirect.service /etc/systemd/system/
 
