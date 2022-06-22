@@ -2,7 +2,7 @@
 Description = Suzakutakumi's portfolio site
 
 [Service]
-WorkingDirectory=/opt/portfolio
+WorkingDirectory=/opt/portfolio/back
 ExecStart=sudo ./main
 Restart=always
 Type=simple
